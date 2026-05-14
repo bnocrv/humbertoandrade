@@ -7,19 +7,22 @@
   <meta name="description" content="Instalação e manutenção de CFTV, controle de acesso, alarmes, cerca elétrica, PABX e monitoramento para residências, empresas e condomínios no Rio de Janeiro." />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Oswald:wght@500;600;700&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg: #f5f7f4;
-      --paper: #ffffff;
-      --ink: #17211b;
-      --muted: #657169;
-      --line: #dfe5df;
-      --brand: #4f8b2f;
-      --brand-dark: #315d1d;
-      --dark: #101813;
-      --soft: #eef4ec;
-      --shadow: 0 22px 55px rgba(21, 34, 26, 0.12);
+      --bg: #050908;
+      --paper: #0d1411;
+      --ink: #f4f7f5;
+      --muted: #a6b2ad;
+      --line: rgba(29, 230, 93, 0.22);
+      --brand: #00b947;
+      --brand-bright: #20f06a;
+      --brand-dark: #007f32;
+      --dark: #050908;
+      --panel: #0a100d;
+      --panel-2: #101813;
+      --soft: rgba(0, 185, 71, 0.13);
+      --shadow: 0 28px 80px rgba(0, 0, 0, 0.45);
       --radius: 8px;
       --wrap: 1180px;
     }
@@ -37,6 +40,18 @@
       color: var(--ink);
       background: var(--bg);
       line-height: 1.55;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      background:
+        linear-gradient(135deg, rgba(0, 185, 71, 0.08), transparent 32%),
+        repeating-linear-gradient(135deg, rgba(255, 255, 255, 0.035) 0 1px, transparent 1px 12px),
+        var(--bg);
+      pointer-events: none;
     }
 
     body.menu-open { overflow: hidden; }
@@ -67,8 +82,8 @@
       position: sticky;
       top: 0;
       z-index: 40;
-      background: rgba(255, 255, 255, 0.95);
-      border-bottom: 1px solid var(--line);
+      background: rgba(5, 9, 8, 0.92);
+      border-bottom: 1px solid rgba(32, 240, 106, 0.22);
       backdrop-filter: blur(14px);
     }
 
@@ -85,8 +100,12 @@
       align-items: center;
       gap: 12px;
       min-width: 0;
-      font-weight: 800;
-      letter-spacing: 0.02em;
+      color: #fff;
+      font-family: "Oswald", "Inter", sans-serif;
+      font-size: 1.12rem;
+      font-weight: 900;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
     }
 
     .brand-mark {
@@ -95,9 +114,10 @@
       display: grid;
       place-items: center;
       border-radius: var(--radius);
-      background: var(--brand);
+      background: linear-gradient(135deg, var(--brand-bright), var(--brand-dark));
       color: #fff;
       font-weight: 900;
+      box-shadow: 0 0 28px rgba(0, 185, 71, 0.32);
     }
 
     .brand-mark svg {
@@ -108,23 +128,27 @@
     .brand small {
       display: block;
       margin-top: 1px;
-      color: var(--muted);
+      color: rgba(255, 255, 255, 0.64);
+      font-family: "Inter", sans-serif;
       font-size: 0.78rem;
       font-weight: 600;
       letter-spacing: 0;
+      text-transform: none;
     }
 
     .nav-links {
       display: flex;
       align-items: center;
       gap: 26px;
-      color: #344138;
+      color: rgba(255, 255, 255, 0.78);
       font-size: 0.95rem;
-      font-weight: 700;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
     }
 
     .nav-links a:hover {
-      color: var(--brand-dark);
+      color: var(--brand-bright);
     }
 
     .btn {
@@ -136,16 +160,19 @@
       padding: 0 20px;
       border: 1px solid transparent;
       border-radius: var(--radius);
-      background: var(--brand);
+      background: linear-gradient(135deg, var(--brand-bright), var(--brand-dark));
       color: #fff;
       font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
       cursor: pointer;
-      transition: transform 0.18s ease, background 0.18s ease, border-color 0.18s ease;
+      box-shadow: 0 12px 28px rgba(0, 185, 71, 0.18);
+      transition: transform 0.18s ease, filter 0.18s ease, border-color 0.18s ease;
     }
 
     .btn:hover {
       transform: translateY(-1px);
-      background: var(--brand-dark);
+      filter: brightness(1.08);
     }
 
     .btn svg {
@@ -175,10 +202,10 @@
       display: none;
       width: 46px;
       height: 46px;
-      border: 1px solid var(--line);
+      border: 1px solid rgba(32, 240, 106, 0.3);
       border-radius: var(--radius);
-      background: #fff;
-      color: var(--ink);
+      background: rgba(255, 255, 255, 0.06);
+      color: #fff;
       cursor: pointer;
     }
 
@@ -194,13 +221,46 @@
     }
 
     .hero {
-      background: var(--dark);
+      position: relative;
+      background:
+        linear-gradient(115deg, rgba(0, 0, 0, 0.78) 0 42%, rgba(0, 185, 71, 0.08) 42% 43%, transparent 43%),
+        radial-gradient(circle at 78% 16%, rgba(0, 185, 71, 0.18), transparent 34%),
+        var(--dark);
       color: #fff;
       overflow: hidden;
       padding: 0;
     }
 
+    .hero::before,
+    .hero::after {
+      content: "";
+      position: absolute;
+      pointer-events: none;
+    }
+
+    .hero::before {
+      right: -120px;
+      top: -150px;
+      width: 420px;
+      height: 420px;
+      background: linear-gradient(135deg, transparent 50%, rgba(0, 185, 71, 0.9) 50%);
+      transform: rotate(45deg);
+      opacity: 0.7;
+    }
+
+    .hero::after {
+      right: 7vw;
+      bottom: -90px;
+      width: 280px;
+      height: 280px;
+      border: 22px solid rgba(0, 185, 71, 0.55);
+      transform: rotate(45deg);
+      opacity: 0.55;
+    }
+
     .hero .wrap {
+      position: relative;
+      z-index: 1;
       min-height: auto;
       display: grid;
       grid-template-columns: minmax(0, 1.02fr) minmax(320px, 0.98fr);
@@ -215,18 +275,19 @@
       align-items: center;
       gap: 9px;
       margin: 0 0 18px;
-      color: #bfe0b0;
-      font-size: 0.83rem;
+      color: #c6ffd8;
+      font-family: "Oswald", "Inter", sans-serif;
+      font-size: 0.95rem;
       font-weight: 800;
-      letter-spacing: 0.12em;
+      letter-spacing: 0.18em;
       text-transform: uppercase;
     }
 
     .eyebrow::before {
       content: "";
       width: 34px;
-      height: 2px;
-      background: var(--brand);
+      height: 3px;
+      background: var(--brand-bright);
     }
 
     h1,
@@ -239,9 +300,18 @@
     h1 {
       max-width: 760px;
       margin-bottom: 22px;
-      font-size: clamp(2.35rem, 6vw, 5rem);
+      font-family: "Oswald", "Inter", sans-serif;
+      font-size: clamp(3rem, 7vw, 6.8rem);
+      font-weight: 700;
       line-height: 0.98;
-      letter-spacing: -0.03em;
+      letter-spacing: -0.01em;
+      text-transform: uppercase;
+      text-shadow: 0 10px 35px rgba(0, 0, 0, 0.42);
+    }
+
+    h1 .green {
+      color: var(--brand-bright);
+      display: block;
     }
 
     .hero-copy {
@@ -266,13 +336,13 @@
       overflow: hidden;
       border: 1px solid rgba(255, 255, 255, 0.14);
       border-radius: var(--radius);
-      background: rgba(255, 255, 255, 0.14);
+      background: rgba(0, 185, 71, 0.3);
     }
 
     .trust-row div {
       min-height: 92px;
       padding: 17px;
-      background: rgba(255, 255, 255, 0.055);
+      background: rgba(4, 10, 8, 0.78);
     }
 
     .trust-row strong {
@@ -294,6 +364,8 @@
       overflow: hidden;
       box-shadow: var(--shadow);
       background: #202820;
+      border: 1px solid rgba(32, 240, 106, 0.25);
+      clip-path: polygon(0 0, 100% 0, 100% 88%, 88% 100%, 0 100%);
     }
 
     .hero-card img {
@@ -307,7 +379,7 @@
       padding: 16px 18px;
       border: 1px solid rgba(255, 255, 255, 0.12);
       border-radius: var(--radius);
-      background: rgba(255, 255, 255, 0.055);
+      background: linear-gradient(135deg, rgba(0, 185, 71, 0.13), rgba(255, 255, 255, 0.055));
       color: #fff;
     }
 
@@ -341,18 +413,22 @@
 
     .section-kicker {
       margin-bottom: 8px;
-      color: var(--brand-dark);
-      font-size: 0.8rem;
+      color: var(--brand-bright);
+      font-family: "Oswald", "Inter", sans-serif;
+      font-size: 0.92rem;
       font-weight: 900;
-      letter-spacing: 0.12em;
+      letter-spacing: 0.18em;
       text-transform: uppercase;
     }
 
     h2 {
       margin-bottom: 0;
-      font-size: clamp(1.9rem, 4vw, 3.3rem);
+      font-family: "Oswald", "Inter", sans-serif;
+      font-size: clamp(2.2rem, 4.8vw, 4.4rem);
+      font-weight: 700;
       line-height: 1.08;
-      letter-spacing: -0.03em;
+      letter-spacing: -0.01em;
+      text-transform: uppercase;
     }
 
     .section-head p {
@@ -362,7 +438,9 @@
     }
 
     .services {
-      background: var(--paper);
+      background:
+        linear-gradient(135deg, transparent 0 70%, rgba(0, 185, 71, 0.08) 70% 72%, transparent 72%),
+        var(--panel);
     }
 
     .service-grid {
@@ -376,20 +454,26 @@
       padding: 26px;
       border: 1px solid var(--line);
       border-radius: var(--radius);
-      background: #fff;
-      box-shadow: 0 10px 28px rgba(21, 34, 26, 0.045);
+      background:
+        linear-gradient(145deg, rgba(255, 255, 255, 0.055), rgba(255, 255, 255, 0.015)),
+        var(--panel-2);
+      box-shadow: 0 18px 42px rgba(0, 0, 0, 0.24);
       transition: transform 0.18s ease, border-color 0.18s ease, box-shadow 0.18s ease;
     }
 
     .service-card:hover {
       transform: translateY(-2px);
-      border-color: rgba(79, 139, 47, 0.35);
-      box-shadow: 0 16px 34px rgba(21, 34, 26, 0.08);
+      border-color: rgba(32, 240, 106, 0.58);
+      box-shadow: 0 18px 48px rgba(0, 185, 71, 0.12);
     }
 
     .service-card h3 {
       margin-bottom: 12px;
+      color: #fff;
+      font-family: "Oswald", "Inter", sans-serif;
       font-size: 1.12rem;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
     }
 
     .service-icon {
@@ -399,8 +483,9 @@
       place-items: center;
       margin-bottom: 20px;
       border-radius: var(--radius);
-      background: var(--soft);
-      color: var(--brand-dark);
+      background: rgba(0, 185, 71, 0.14);
+      color: var(--brand-bright);
+      border: 1px solid rgba(32, 240, 106, 0.35);
     }
 
     .service-icon svg {
@@ -438,8 +523,8 @@
       padding-left: 44px;
       border: 1px solid var(--line);
       border-radius: var(--radius);
-      background: var(--paper);
-      color: #314039;
+      background: rgba(255, 255, 255, 0.045);
+      color: rgba(255, 255, 255, 0.86);
       font-weight: 700;
     }
 
@@ -451,8 +536,8 @@
       width: 14px;
       height: 14px;
       border-radius: 50%;
-      background: var(--brand);
-      box-shadow: inset 0 0 0 4px #dcebd6;
+      background: var(--brand-bright);
+      box-shadow: 0 0 16px rgba(32, 240, 106, 0.45), inset 0 0 0 4px rgba(5, 9, 8, 0.8);
     }
 
     .doc-strip {
@@ -461,7 +546,8 @@
       gap: 12px;
       padding: 18px;
       border-radius: var(--radius);
-      background: var(--dark);
+      background: linear-gradient(135deg, rgba(0, 185, 71, 0.16), rgba(255, 255, 255, 0.045));
+      border: 1px solid rgba(32, 240, 106, 0.28);
       color: #fff;
     }
 
@@ -470,7 +556,9 @@
     }
 
     .portfolio {
-      background: var(--paper);
+      background:
+        repeating-linear-gradient(135deg, rgba(255, 255, 255, 0.025) 0 1px, transparent 1px 13px),
+        #070c0a;
     }
 
     .portfolio-grid {
@@ -489,7 +577,8 @@
       cursor: zoom-in;
       padding: 0;
       text-align: left;
-      box-shadow: 0 12px 28px rgba(21, 34, 26, 0.08);
+      border: 1px solid rgba(32, 240, 106, 0.2);
+      box-shadow: 0 18px 42px rgba(0, 0, 0, 0.34);
     }
 
     .portfolio-item img {
@@ -504,7 +593,9 @@
     }
 
     .contact {
-      background: var(--dark);
+      background:
+        radial-gradient(circle at 12% 16%, rgba(0, 185, 71, 0.16), transparent 28%),
+        linear-gradient(135deg, #050908, #0b120f);
       color: #fff;
     }
 
@@ -545,8 +636,9 @@
       display: grid;
       place-items: center;
       border-radius: var(--radius);
-      background: rgba(255, 255, 255, 0.1);
-      color: #bfe0b0;
+      background: rgba(0, 185, 71, 0.14);
+      color: var(--brand-bright);
+      border: 1px solid rgba(32, 240, 106, 0.26);
     }
 
     .info-card > .info-icon svg {
@@ -573,8 +665,9 @@
       gap: 14px;
       padding: 24px;
       border-radius: var(--radius);
-      background: #fff;
-      color: var(--ink);
+      background: rgba(255, 255, 255, 0.96);
+      color: #111916;
+      box-shadow: var(--shadow);
     }
 
     .field {
@@ -596,7 +689,7 @@
       border-radius: var(--radius);
       background: #fff;
       padding: 13px 14px;
-      color: var(--ink);
+      color: #111916;
       outline: none;
     }
 
@@ -614,8 +707,9 @@
 
     .site-footer {
       padding: 28px 0;
-      background: #0b100d;
+      background: #030504;
       color: rgba(255, 255, 255, 0.68);
+      border-top: 1px solid rgba(32, 240, 106, 0.16);
     }
 
     .site-footer .wrap {
@@ -673,9 +767,9 @@
         align-items: stretch;
         gap: 0;
         padding: 8px;
-        border: 1px solid var(--line);
+        border: 1px solid rgba(32, 240, 106, 0.24);
         border-radius: var(--radius);
-        background: #fff;
+        background: rgba(5, 9, 8, 0.98);
         box-shadow: var(--shadow);
       }
 
@@ -808,7 +902,7 @@
       <div class="wrap">
         <div>
           <p class="eyebrow">Desde 2020</p>
-          <h1>Segurança eletrônica com instalação séria e manutenção confiável.</h1>
+          <h1>Segurança eletrônica <span class="green">para o seu dia a dia.</span></h1>
           <p class="hero-copy">Atendimento técnico para catracas, CFTV, alarmes, controle de acesso, cerca elétrica, PABX e monitoramento. Soluções sob medida para residências, empresas e condomínios.</p>
           <div class="hero-actions">
             <a class="btn" href="https://wa.me/5521979147414?text=Ol%C3%A1%2C%20gostaria%20de%20um%20or%C3%A7amento." target="_blank" rel="noopener">
